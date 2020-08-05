@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     </head>
     <body>
-        <header><h1>My Guitar Shop</h1></header>
+        <header><h1>Database Error</h1></header>
 
         <main>
             <h1>Database Error</h1>
