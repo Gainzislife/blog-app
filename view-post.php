@@ -1,5 +1,6 @@
 <?php
 require_once('lib/database.php');
+require('lib/common.php');
 
 // Get the post ID
 if (isset($_GET['post_id'])) {
@@ -24,6 +25,10 @@ if ($result === false) {
 }
 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Swap carriage returns for paragraph breaks
+$body_text = htmlEscape($row['body']);
+$paragraph_text = str_replace('\n', '</p><p>', $body_text);
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +49,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       <?php echo $row['created_at']; ?>
     </div>
     <p>
-      <?php echo htmlspecialchars($row['body'], ENT_HTML5, 'UTF-8'); ?>
+      <?php echo $paragraph_text; ?>
     </p>
   </body>
 </html>
