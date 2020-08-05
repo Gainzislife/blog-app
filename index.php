@@ -1,5 +1,6 @@
 <?php
 require_once('lib/database.php');
+require('lib/common.php');
 
 $stmt = $db->query(
 	'SELECT id, title, created_at, body
@@ -22,13 +23,13 @@ if ($stmt === false) {
 
 		<?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
 			<h2>
-				<?php echo htmlspecialchars($row['title'], ENT_HTML5, 'UTF-8'); ?>
+				<?php echo htmlEscape($row['title']); ?>
 			</h2>
 			<div>
 				<?php echo $row['created_at']; ?>
 			</div>
 			<p>
-				<?php echo htmlspecialchars($row['body'], ENT_HTML5, 'UTF-8'); ?>
+				<?php echo htmlEscape($row['body']); ?>
 			</p>
 			<p>
 				<a href="view-post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
