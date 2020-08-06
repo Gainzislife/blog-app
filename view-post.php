@@ -1,5 +1,6 @@
 <?php
 require_once('lib/database.php');
+require_once('lib/view-post.php');
 require('lib/common.php');
 
 // Get the post ID
@@ -9,22 +10,12 @@ if (isset($_GET['post_id'])) {
   $postId = 0;
 }
 
-$query = 'SELECT title, created_at, body
-          FROM post
-          WHERE id = :id';
-$stmt = $db->prepare($query);
+$row = getPostRow($db, $postId);
 
-if ($stmt === false) {
-  throw new Exception('There was a problem preparing this query');
+// If the post doesn't exist
+if (!$row) {
+  redirectAndExit('index.php?not-found=1');
 }
-
-$result = $stmt->execute(array('id' => $postId, ));
-
-if ($result === false) {
-  throw new Exception('There was a problem running this query');
-}
-
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Swap carriage returns for paragraph breaks
 $body_text = htmlEscape($row['body']);

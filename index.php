@@ -11,6 +11,8 @@ $stmt = $db->query(
 if ($stmt === false) {
 	throw new Exception('There was a problem running this query');
 }
+
+$not_found = isset($_GET['not-found']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,12 @@ if ($stmt === false) {
 	</head>
 	<body>
 		<?php require('templates/title.php'); ?>
+
+		<?php if ($not_found) : ?>
+			<div style="border: 1px solid #ff6666; padding: 6px;">
+				Error: cannot find the requested blog post
+			</div>
+		<?php endif ?>
 
 		<?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
 			<h2>
@@ -36,7 +44,7 @@ if ($stmt === false) {
 			<p>
 				<a href="view-post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
 			</p>
-		<?php endwhile; ?>
+		<?php endwhile ?>
 
 	</body>
 </html>

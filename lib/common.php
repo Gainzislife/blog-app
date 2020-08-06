@@ -11,9 +11,22 @@ function htmlEscape($html) {
 }
 
 function convertSqlDate($sqlDate) {
-  $date = DateTime::createFromFormat('Y-m-d', $sqlDate);
+  /* @var $date DateTime */
+  $date = DateTime::createFromFormat('Y-m-d H:i:s', $sqlDate);
 
-  return $date->format('d M Y');
+  return $date->format('d M Y, H:i');
+}
+
+function redirectAndExit($script) {
+  // Get the domain-relative URL
+  $relativeUrl = $_SERVER['PHP_SELF'];
+  $urlFolder = substr($relativeUrl, 0, strrpos($relativeUrl, '/') + 1);
+
+  // Redirect to full URL
+  $host = $_SERVER['HTTP_HOST'];
+  $fullUrl = 'http://' . $host . $urlFolder . $script;
+  header('Location: ' . $fullUrl);
+  exit();
 }
 
 /**

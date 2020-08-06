@@ -27,8 +27,9 @@ VALUES(
 
 	It is split into paragraphs.",
     1,
-    DATE_ADD(CURDATE(), INTERVAL -2 MONTH)
+    DATE_ADD(CURDATE(), INTERVAL '-60 0:-45:10' DAY_SECOND)
 );
+
 INSERT INTO post(
     title,
     body,
@@ -40,8 +41,9 @@ VALUES(
     "This is the body of the second post.
 	This is another paragraph.",
     1,
-    DATE_ADD(CURDATE(), INTERVAL -40 DAY)
+    DATE_ADD(CURDATE(), INTERVAL '-40 10:55:51' DAY_SECOND)
 );
+
 INSERT INTO post(
     title,
     body,
@@ -53,10 +55,11 @@ VALUES(
     "This is the body of the third post.
 	This is split into paragraphs.",
     1,
-    DATE_ADD(CURDATE(), INTERVAL -13 DAY)
+    DATE_ADD(CURDATE(), INTERVAL '-13 3:18:24' DAY_SECOND)
 );
+
 -- create comment table
-CREATE TABLE COMMENT(
+CREATE TABLE comment(
     id INT AUTO_INCREMENT NOT NULL,
     post_id INT NOT NULL,
     created_at VARCHAR(50) NOT NULL,
@@ -64,7 +67,9 @@ CREATE TABLE COMMENT(
     website VARCHAR(255),
     text VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
-); INSERT INTO COMMENT(
+);
+
+INSERT INTO comment(
     post_id,
     created_at,
     name,
@@ -73,12 +78,13 @@ CREATE TABLE COMMENT(
 )
 VALUES(
     1,
-    DATE_ADD(CURDATE(), INTERVAL -10 DAY),
+    DATE_ADD(CURDATE(), INTERVAL '-10 0:-30:7' DAY_SECOND),
     'Jimmy',
     'http://example.com/',
     "This is Jimmy's contribution"
 );
-INSERT INTO COMMENT(
+
+INSERT INTO comment(
     post_id,
     created_at,
     name,
@@ -87,7 +93,7 @@ INSERT INTO COMMENT(
 )
 VALUES(
     1,
-    DATE_ADD(CURDATE(), INTERVAL -8 DAY),
+    DATE_ADD(CURDATE(), INTERVAL '-8 9:9:32' DAY_SECOND),
     'Jonny',
     'http://anotherexample.com/',
     "This is a comment from Jonny"
