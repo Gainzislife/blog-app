@@ -1,4 +1,5 @@
 <?php
+
     $dsn = 'mysql:host=localhost;dbname=blog';
     $username = 'jaco';
     $password = 'swordfish';
@@ -10,4 +11,3 @@
         include('database_error.php');
         exit();
     }
-?>
