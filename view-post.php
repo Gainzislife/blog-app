@@ -17,6 +17,23 @@ if (!$row) {
   redirectAndExit('index.php?not-found=1');
 }
 
+$errors = null;
+
+if ($_POST) {
+  $commentData = array(
+    'name' => $_POST['comment-name'],
+    'website' => $_POST['comment-website'],
+    'text' => $_POST['comment-text'],
+  );
+
+  $errors = addCommentToPost($db, $postId, $commentData);
+
+  // If there are no errors, redirect back to self redisplay
+  if (!$errors) {
+    redirectAndExit('view-post.php?post_id=' . $postId);
+  }
+}
+
 // Swap carriage returns for paragraph breaks
 $body_text = htmlEscape($row['body']);
 $paragraph_text = str_replace('\n', '</p><p>', $body_text);
@@ -58,5 +75,7 @@ $paragraph_text = str_replace('\n', '</p><p>', $body_text);
         </div>
       </div>
     <?php endforeach; ?>
+
+    <?php require('templates/comment-form.php'); ?>
   </body>
 </html>

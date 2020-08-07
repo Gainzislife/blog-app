@@ -27,3 +27,49 @@ function getPostRow(PDO $pdo, $postId) {
 
   return $row;
 }
+
+/**
+ * Writes a comment to a post
+ * 
+ * @param PDO $pdo
+ * @param integer $postId
+ * @param array $commentData
+ * @return array
+ */
+function addCommentToPost(PDO $pdo, $postId, array $commentData) {
+  $errors = array();
+
+  // Do some validation
+  if (empty($commentData['name'])) {
+    $errors['name'] = 'A name is required';
+  }
+
+  if (empty($commentData['text'])) {
+    $errors['text'] = 'A comment is required';
+  }
+
+  // If there are no errors, try writing the comment
+  if (!$errors) {
+    $query = "INSERT INTO comment
+              (name, website, text, post_id)
+              VALUES (:name, :website, :text, :post_id)";
+    $stmt = $pdo->prepare($query);
+
+    if ($stmt === false) {
+      throw new Exception('Cannot prepare statement to insert comment');
+    }
+
+    $result = $stmt->execute(array_merge($commentData, array('post_id' => $postId, )));
+
+    if ($result === false) {
+      // TODO: This renders a database-level message to the user, fix this
+      $errorInfo = $stmt->errorInfo();
+
+      if ($errorInfo) {
+        $errors[] = $errorInfo[2];
+      }
+    }
+  }
+
+  return $errors;
+}
