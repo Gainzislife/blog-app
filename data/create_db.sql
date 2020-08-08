@@ -1,10 +1,10 @@
 /**
  * Database creation script
  */
-DROP
-    DATABASE IF EXISTS blog;
-CREATE DATABASE blog; USE
-    blog;
+DROP DATABASE IF EXISTS blog;
+CREATE DATABASE blog;
+USE blog;
+
 CREATE TABLE post(
     id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(255) NOT NULL,
@@ -14,6 +14,7 @@ CREATE TABLE post(
     updated_at VARCHAR(50),
     PRIMARY KEY(id)
 );
+
 -- create post table
 INSERT INTO post(
     title,
@@ -97,4 +98,13 @@ VALUES(
     'Jonny',
     'http://anotherexample.com/',
     "This is a comment from Jonny"
+);
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT NOT NULL,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    created_at VARCHAR NOT NULL,
+    is_enabled BOOLEAN NOT NULL DEFAULT 1,
+    PRIMARY KEY(id)
 );

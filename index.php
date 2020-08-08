@@ -27,7 +27,7 @@ $not_found = isset($_GET['not-found']);
 			<div style="border: 1px solid #ff6666; padding: 6px;">
 				Error: cannot find the requested blog post
 			</div>
-		<?php endif ?>
+		<?php endif; ?>
 
 		<?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
 			<h2>
@@ -44,7 +44,7 @@ $not_found = isset($_GET['not-found']);
 			<p>
 				<a href="view-post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
 			</p>
-		<?php endwhile ?>
+		<?php endwhile; ?>
 
 	</body>
 </html>

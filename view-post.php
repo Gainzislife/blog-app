@@ -34,9 +34,6 @@ if ($_POST) {
   }
 }
 
-// Swap carriage returns for paragraph breaks
-$body_text = htmlEscape($row['body']);
-$paragraph_text = str_replace('\n', '</p><p>', $body_text);
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,7 +53,7 @@ $paragraph_text = str_replace('\n', '</p><p>', $body_text);
       <?php echo convertSqlDate($row['created_at']); ?>
     </div>
     <p>
-      <?php echo $paragraph_text; ?>
+      <?php echo convertNewLinesToParagraphs($row['body']); ?>
     </p>
 
     <h3><?php echo countCommentsForPost($postId); ?> comments</h3>
@@ -71,7 +68,7 @@ $paragraph_text = str_replace('\n', '</p><p>', $body_text);
           <?php echo convertSqlDate($comment['created_at']); ?>
         </div>
         <div class="comment-body">
-          <?php echo htmlEscape($comment['text']); ?>
+          <?php echo convertNewLinesToParagraphs($comment['text']); ?>
         </div>
       </div>
     <?php endforeach; ?>
