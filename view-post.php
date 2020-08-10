@@ -39,9 +39,9 @@ if ($_POST) {
 <html>
   <head>
     <title>
-      A Blog App | <?php echo htmlspecialchars($row['title'], ENT_HTML5, 'UTF-8'); ?>
+      A Blog App | <?php echo htmlEscape($row['title']); ?>
     </title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <?php require('templates/head.php'); ?>
   </head>
   <body>
     <?php require('templates/title.php'); ?>

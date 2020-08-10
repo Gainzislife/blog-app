@@ -1,4 +1,4 @@
-<div style="float: right;">
+<div class="top-menu menu-options">
   <a href="login.php">Log in</a>
 </div>
 

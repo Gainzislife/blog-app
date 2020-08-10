@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <?php require 'templates/head.php' ?>
     <title>A Blog App | Login</title>
   </head>
   <body>

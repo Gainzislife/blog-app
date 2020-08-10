@@ -78,3 +78,13 @@ function getCommentsForPost($postId) {
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// function tryLogin(PDO $pdo, $username, $password) {
+//   $query = "SELECT password
+//             FROM user
+//             WHERE username = :username";
+//   $stmt = $pdo->prepare($query);
+//   $stmt->execute(array('username' => $username, ));
+
+//   //
+// }
